@@ -45,11 +45,11 @@ void Dungeon::setTile(pair<int, int> coords, int value) { dungeon[coords.first][
 int Dungeon::getTile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
 
 //TODO 
-// print()
-// getNeighborhood (includes diagonals, 8 surroundings) PUT IN CELL CLASS for now -- gets value of neighborhood
+// print() -- Sidd
+// getNeighborhood (includes diagonals, 8 surroundings) PUT IN Dungeon class -- Rory
 // Every index should have a cell (class) in them
-// Cell class - they should contain some value, 0 for floor, 1 for rock, 2 for wall (might need to change in future for rules to work), function to get the value of neighborhood (getneighborhood?)
-// make basic functions for rules, only looks at individual cell! No calling iterively etc.
-// Makefile
+// Cell class - they should contain some value, 0 for floor, 1 for rock, 2 for wall (might need to change in future for rules to work), function to get the value of neighborhood (getneighborhood?) -- Rory
+// make basic functions for rules, only looks at individual cell! No calling iterively etc. -- Sidd
+// Makefile -- Sidd
 
 #endif
