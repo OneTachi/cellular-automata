@@ -8,8 +8,7 @@
 
 #include <vector>
 
-using namespace std;
-// :) 
+using namespace std; 
 class Dungeon
 {
 public:	
@@ -19,10 +18,10 @@ public:
 	void print();
 	
 private:
-	vector<int><int> dungeon; // Row then column for access
+	vector<vector<int>> dungeon; // Row then column for access
 	int num_rows;
 	int num_cols;
-}
+};
 
 Dungeon::Dungeon(int rows, int cols)
 {

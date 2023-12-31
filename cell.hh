@@ -19,18 +19,20 @@ public:
 	
 private:
 	int value;
-}
+};
 //Constructor
-Cell:Cell(int valueGiven)
+Cell::Cell(int valueGiven)
 {
 	value = valueGiven;
 }
 //Getter and Setter for value
-Cell:setCellValue(int newVal)
+void Cell::setCellValue(int newVal)
 {
 	value = newVal;
 }
-Cell:getCellValue()
+int Cell::getCellValue()
 {
 	return value;
 }
+
+#endif
