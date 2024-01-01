@@ -9,6 +9,10 @@ using namespace std;
 
 // Cell class - they should contain some value, 0 for floor, 1 for rock, 2 for wall (might need to change in future for rules to work), function to get the value of neighborhood (getneighborhood?)
 
+const int FLOOR = 0;
+const int ROCK = 1;
+const int WALL = 2;
+
 class Cell
 {
 public:
