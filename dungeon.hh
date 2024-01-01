@@ -10,6 +10,7 @@
 
 //The value each cell starts with
 int startingCellValue = 0;
+const int startingCellValue = 0;
 
 using namespace std; 
 class Dungeon
@@ -48,7 +49,7 @@ Dungeon::Dungeon(int rows, int cols)
 		for(int j=0; j<num_cols; j++)
 		{
 			//Cell startCell = new Cell(startingCellValue);
-			dungeon[i][j] = startCell;
+			dungeon[i][j] = startingCellValue;
 		}
 	}
 	*/
@@ -62,8 +63,7 @@ int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coor
 int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 {
 	int neighborhoodValue = 0;
-	
-	Cell temp = get_tile(rowIndex, colIndex);
+	int temp;
 	bool topValid = false;
 	bool bottomValid = false;
 	//Cases where index of cell is at edge of dungeon
@@ -71,7 +71,7 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	{
 		//Gets node directly above the starting node
 		temp = get_tile(rowIndex-1, colIndex);
-		neighborhoodValue += temp->getCellValue();
+		neighborhoodValue += temp;
 		//States the top is possibly valid
 		topValid = true;
 	}
@@ -79,7 +79,7 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	{
 		//Gets node directly above the starting node
 		temp = get_tile(rowIndex+1, colIndex);
-		neighborhoodValue += temp->getCellValue();
+		neighborhoodValue += temp;
 		//Says bottom is possibly valid
 		bottomValid = true;
 	}
@@ -87,36 +87,36 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	{
 		//Gets node directly left of the starting node
 		temp = get_tile(rowIndex, colIndex-1);
-		neighborhoodValue += temp->getCellValue();
+		neighborhoodValue += temp;
 		//Checks for the top left node 
 		if(topValid)
 		{
 			temp = get_tile(rowIndex-1, colIndex-1);
-			neighborhoodValue += temp->getCellValue();
+			neighborhoodValue += temp;
 		}
 		//Checks for the bottom left node 
 		if(bottomValid)
 		{
 			temp = get_tile(rowIndex+1, colIndex-1);
-			neighborhoodValue += temp->getCellValue();
+			neighborhoodValue += temp;
 		}
 	}
 	if(rowIndex < num_cols)
 	{
 		//Gets node directly right of the starting node
 		temp = get_tile(rowIndex, colIndex+1);
-		neighborhoodValue += temp->getCellValue();
+		neighborhoodValue += temp;
 		//Checks for the top right node 
 		if(topValid)
 		{
 			temp = get_tile(rowIndex-1, colIndex+1);
-			neighborhoodValue += temp->getCellValue();
+			neighborhoodValue += temp;
 		}
 		//Checks for the bottom right node 
 		if(bottomValid)
 		{
 			temp = get_tile(rowIndex+1, colIndex+1);
-			neighborhoodValue += temp->getCellValue();
+			neighborhoodValue += temp;
 		}
 	}
 	return neighborhoodValue;
