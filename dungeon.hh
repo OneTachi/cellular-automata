@@ -9,7 +9,6 @@
 #include <vector>
 
 //The value each cell starts with
-int startingCellValue = 0;
 const int startingCellValue = 0;
 
 using namespace std; 
@@ -48,7 +47,6 @@ Dungeon::Dungeon(int rows, int cols)
 	{
 		for(int j=0; j<num_cols; j++)
 		{
-			//Cell startCell = new Cell(startingCellValue);
 			dungeon[i][j] = startingCellValue;
 		}
 	}
