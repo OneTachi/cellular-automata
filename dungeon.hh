@@ -80,7 +80,7 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	if(rowIndex < num_rows)
 	{
 		//Gets node directly above the starting node
-		temp = get_tile(rowIndex+1, colIndex);
+		temp = get_tile(pair<int, int>(rowIndex+1, colIndex));
 		neighborhoodValue += temp;
 		//Says bottom is possibly valid
 		bottomValid = true;
@@ -88,36 +88,36 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	if(colIndex > 0)
 	{
 		//Gets node directly left of the starting node
-		temp = get_tile(rowIndex, colIndex-1);
+		temp = get_tile(pair<int, int>(rowIndex, colIndex-1));
 		neighborhoodValue += temp;
 		//Checks for the top left node 
 		if(topValid)
 		{
-			temp = get_tile(rowIndex-1, colIndex-1);
+			temp = get_tile(pair<int, int>(rowIndex-1, colIndex-1));
 			neighborhoodValue += temp;
 		}
 		//Checks for the bottom left node 
 		if(bottomValid)
 		{
-			temp = get_tile(rowIndex+1, colIndex-1);
+			temp = get_tile(pair<int, int>(rowIndex+1, colIndex-1));
 			neighborhoodValue += temp;
 		}
 	}
 	if(rowIndex < num_cols)
 	{
 		//Gets node directly right of the starting node
-		temp = get_tile(rowIndex, colIndex+1);
+		temp = get_tile(pair<int, int>(rowIndex, colIndex+1));
 		neighborhoodValue += temp;
 		//Checks for the top right node 
 		if(topValid)
 		{
-			temp = get_tile(rowIndex-1, colIndex+1);
+			temp = get_tile(pair<int, int>(rowIndex-1, colIndex+1));
 			neighborhoodValue += temp;
 		}
 		//Checks for the bottom right node 
 		if(bottomValid)
 		{
-			temp = get_tile(rowIndex+1, colIndex+1);
+			temp = get_tile(pair<int, int>(rowIndex+1, colIndex+1));
 			neighborhoodValue += temp;
 		}
 	}
