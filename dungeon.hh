@@ -61,8 +61,7 @@ Dungeon::Dungeon(int rows, int cols)
 
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
 int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
-
-int Dungeon::get_neighborhood(int rowIndex, int colIndex)
+int Dungeon::get_neighborhood(int rowIndex, int colIndex) // val
 {
 	int neighborhoodValue = 0;
 	int temp;
@@ -140,9 +139,7 @@ void Dungeon::apply_rule(pair<int, int> coords)
 
 //TODO 
 // print() -- Sidd
-// getNeighborhood (includes diagonals, 8 surroundings) PUT IN Dungeon class -- Rory
-// Every index should have a cell (class) in them
-// Cell class - they should contain some value, 0 for floor, 1 for rock, 2 for wall (might need to change in future for rules to work), function to get the value of neighborhood (getneighborhood?) -- Rory
 // make basic functions for rules, only looks at individual cell! No calling iterively etc. -- Sidd
-
+// Repurpose get_neighborhood so that based on a integer given, gives either neighborhood or if there are any floors -- Rory 
+// Iterative thing -- FIGURE OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Both
 #endif
