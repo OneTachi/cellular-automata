@@ -40,9 +40,9 @@ Dungeon::Dungeon(int rows, int cols)
 	dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
 
 	// Add cells into each index
-	for(int i=0, i<num_rows, i++)
+	for(int i=0; i<num_rows; i++)
 	{
-		for(int j=0, j<num_cols, j++)
+		for(int j=0; j<num_cols; j++)
 		{
 			Cell startCell = new Cell(startingCellValue);
 			dungeon[i][j].push_back(startCell);
@@ -58,10 +58,10 @@ int Dungeon::getTile(pair<int, int> coords) { return dungeon[coords.first][coord
 int getNeighborhood(int rowIndex, int colIndex)
 {
 	int neighborhoodValue = 0;
+	
 	Cell temp = getTile(rowIndex, colIndex);
 	bool topValid = false;
 	bool bottomValid = false;
-	
 	//Cases where index of cell is at edge of dungeon
 	if(rowIndex > 0)
 	{
@@ -115,7 +115,6 @@ int getNeighborhood(int rowIndex, int colIndex)
 			neighborhoodValue += temp->getCellValue();
 		}
 	}
-	
 	return neighborhoodValue;
 }
 
