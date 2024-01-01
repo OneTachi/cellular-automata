@@ -11,6 +11,10 @@
 //The value each cell starts with
 const int startingCellValue = 0;
 
+const int FLOOR = 0;
+const int ROCK = 1;
+const int WALL = 2;
+
 using namespace std; 
 class Dungeon
 {
@@ -68,7 +72,7 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex)
 	if(rowIndex > 0)
 	{
 		//Gets node directly above the starting node
-		temp = get_tile(rowIndex-1, colIndex);
+		temp = get_tile(pair<int, int>(rowIndex-1, colIndex));
 		neighborhoodValue += temp;
 		//States the top is possibly valid
 		topValid = true;

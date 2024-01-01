@@ -1,6 +1,6 @@
 all: automata
 
-automata: cell.hh dungeon.hh main.cpp
+automata: dungeon.hh main.cpp
 	g++ -std=c++11 main.cpp -o automata
 
 clean: 
