@@ -22,7 +22,7 @@ public:
 	Dungeon(int, int);
 	void set_tile(pair<int, int>, int);
 	int get_tile(pair<int, int>);
-	int get_neighborhood(int, int);
+	int get_neighborhood(int, int, int);
 	void print();
 	void apply_rule(pair<int, int>);
 	
@@ -61,12 +61,14 @@ Dungeon::Dungeon(int rows, int cols)
 
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
 int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
-int Dungeon::get_neighborhood(int rowIndex, int colIndex) // val
+//If val = 0 return isNextToFloor, else return neighborhoodTotalValue
+int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex) 
 {
 	int neighborhoodValue = 0;
 	int temp;
 	bool topValid = false;
 	bool bottomValid = false;
+	int isNextToFloor = 0;
 	//Cases where index of cell is at edge of dungeon
 	if(rowIndex > 0)
 	{
@@ -75,6 +77,10 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex) // val
 		neighborhoodValue += temp;
 		//States the top is possibly valid
 		topValid = true;
+		if(temp == 0)
+		{
+			isNextToFloor = 1;
+		}
 	}
 	if(rowIndex < num_rows)
 	{
@@ -83,23 +89,39 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex) // val
 		neighborhoodValue += temp;
 		//Says bottom is possibly valid
 		bottomValid = true;
+		if(temp == 0)
+		{
+			isNextToFloor = 1;
+		}
 	}
 	if(colIndex > 0)
 	{
 		//Gets node directly left of the starting node
 		temp = get_tile(pair<int, int>(rowIndex, colIndex-1));
 		neighborhoodValue += temp;
+		if(temp == 0)
+		{
+			isNextToFloor = 1;
+		}
 		//Checks for the top left node 
 		if(topValid)
 		{
 			temp = get_tile(pair<int, int>(rowIndex-1, colIndex-1));
 			neighborhoodValue += temp;
+			if(temp == 0)
+			{
+				isNextToFloor = 1;
+			}
 		}
 		//Checks for the bottom left node 
 		if(bottomValid)
 		{
 			temp = get_tile(pair<int, int>(rowIndex+1, colIndex-1));
 			neighborhoodValue += temp;
+			if(temp == 0)
+			{
+				isNextToFloor = 1;
+			}
 		}
 	}
 	if(rowIndex < num_cols)
@@ -107,20 +129,37 @@ int Dungeon::get_neighborhood(int rowIndex, int colIndex) // val
 		//Gets node directly right of the starting node
 		temp = get_tile(pair<int, int>(rowIndex, colIndex+1));
 		neighborhoodValue += temp;
+		if(temp == 0)
+		{
+			isNextToFloor = 1;
+		}
 		//Checks for the top right node 
 		if(topValid)
 		{
 			temp = get_tile(pair<int, int>(rowIndex-1, colIndex+1));
 			neighborhoodValue += temp;
+			if(temp == 0)
+			{
+				isNextToFloor = 1;
+			}
 		}
 		//Checks for the bottom right node 
 		if(bottomValid)
 		{
 			temp = get_tile(pair<int, int>(rowIndex+1, colIndex+1));
 			neighborhoodValue += temp;
+			if(temp == 0)
+			{
+				isNextToFloor = 1;
+			}	
 		}
 	}
-	return neighborhoodValue;
+	//If val = 0 return isNextToFloor, else return neighborhoodTotalValue
+	if(val == 0)
+	{
+		return neighborhoodValue;
+	}
+	return isNextToFloor;
 }
 
 void Dungeon::apply_rule(pair<int, int> coords)
