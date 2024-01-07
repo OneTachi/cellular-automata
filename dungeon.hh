@@ -19,7 +19,7 @@ using namespace std;
 class Dungeon
 {
 public:	
-	Dungeon(int, int);
+	Dungeon(int, int, int);
 	
 	void set_tile(pair<int, int>, int);
 	void set_temp_tile(pair<int, int>, int); // Set tile for temporary grid
@@ -41,10 +41,11 @@ private:
 	int generations = 0; // Number of generations we would like to go up to
 };
 
-Dungeon::Dungeon(int rows, int cols)
+Dungeon::Dungeon(int rows, int cols, int generationGoal)
 {
 	num_rows = rows;
 	num_cols = cols;
+	generations = generationGoal;
 	
 	// If we get invalid input, we will assume least possible number of rows/columns
 	if (rows < 1) { num_rows = 1; }
@@ -53,7 +54,17 @@ Dungeon::Dungeon(int rows, int cols)
 	// Set dungeon size
 	dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
 	temp_dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
-	// make_maze()
+	//Sets all tiles in the dungeon to WALLs
+	for(int i=0; i<num_rows; i++)
+	{
+		for(int j=0; j<num_cols; j++)
+		{
+			set_tile(pair<int,int>(i,j), WALL);
+		}
+	}
+	
+	//May have to change this call depending on how stuff is ordered
+	// make_maze(generations)
 }
 
 
@@ -72,7 +83,6 @@ bool Dungeon::is_in_bounds(int x, int y)
 	}
 	return false;
 }
-
 //If val = 0 return isNextToFloor, else return neighborhoodValue
 int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex) 
 {
@@ -123,7 +133,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
  */
 void Dungeon::apply_rule(pair<int, int> coords)
 {
-	int neighborhood = get_neighborhood(coords.first, coords.second);
+	int neighborhood = get_neighborhood(1, coords.first, coords.second);
 	
 	// If neighborhood has 4 or more walls, the current tile is a floor. Otherwise, it will be a wall.	
 	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
@@ -155,8 +165,8 @@ void Dungeon::calculate_generation()
 // make_maze() -- Sidd 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
 
-// Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory 
-// Make get_neighborhood consider out of bounds as walls -- Rory
+// Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory [Currently Done, will need updating]
+// Make get_neighborhood consider out of bounds as walls -- Rory [Done]
 // noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory
 //
 // Later: 
