@@ -6,6 +6,7 @@
 #ifndef DUNGEON_HH
 #define DUNGEON_HH
 
+#include <iostream>
 #include <vector>
 #include <stdlib.h>
 
@@ -33,6 +34,8 @@ public:
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
 	void noise_grid(int, int);
+
+	void make_maze();
 	
 private:
 	vector<vector<int>> dungeon; // Row then column for access
@@ -182,11 +185,38 @@ void Dungeon::calculate_generation()
 		}
 	}
 
-	// Copy temp grid to dungeon grid TODO
-	
+	// Copy temp grid to dungeon grid
+        for (int row = 0; row < num_rows; row++)
+        {
+                for (int col = 0; col < num_cols; col++)
+                {
+			int value = get_temp_tile(pair<int, int>(row, col)); // Get value from temporary grid
+                        set_tile(pair<int, int>(row, col), value); // Put value above into the dungeon grid
+                }
+        }
 }
 
+void Dungeon::make_maze()
+{
+	// Continue to create the next generation till the maximum amount
+	for (; time < generations; time++)
+	{
+		calculate_generation();
+	}
+}
 
+void Dungeon::print()
+{
+	for (int row = 0; row < num_rows; row++)
+	{
+		for (int col = 0; col < num_cols; col++)
+		{
+			int value = get_tile(pair<int, int>(row, col));
+			cout << value << " ";
+		}
+		cout << endl;
+	}
+}
 
 
 
