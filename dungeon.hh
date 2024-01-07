@@ -90,7 +90,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		neighborhoodValue += temp;
 		//Says bottom is possibly valid
 		bottomValid = true;
-		if(temp == 0)
+		if(temp == FLOOR)
 		{
 			isNextToFloor = 1;
 		}
@@ -100,7 +100,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		//Gets node directly left of the starting node
 		temp = get_tile(pair<int, int>(rowIndex, colIndex-1));
 		neighborhoodValue += temp;
-		if(temp == 0)
+		if(temp == FLOOR)
 		{
 			isNextToFloor = 1;
 		}
@@ -109,7 +109,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		{
 			temp = get_tile(pair<int, int>(rowIndex-1, colIndex-1));
 			neighborhoodValue += temp;
-			if(temp == 0)
+			if(temp == FLOOR)
 			{
 				isNextToFloor = 1;
 			}
@@ -119,7 +119,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		{
 			temp = get_tile(pair<int, int>(rowIndex+1, colIndex-1));
 			neighborhoodValue += temp;
-			if(temp == 0)
+			if(temp == 1)
 			{
 				isNextToFloor = 1;
 			}
@@ -130,7 +130,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		//Gets node directly right of the starting node
 		temp = get_tile(pair<int, int>(rowIndex, colIndex+1));
 		neighborhoodValue += temp;
-		if(temp == 0)
+		if(temp == FLOOR)
 		{
 			isNextToFloor = 1;
 		}
@@ -139,7 +139,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		{
 			temp = get_tile(pair<int, int>(rowIndex-1, colIndex+1));
 			neighborhoodValue += temp;
-			if(temp == 0)
+			if(temp == FLOOR)
 			{
 				isNextToFloor = 1;
 			}
@@ -149,7 +149,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		{
 			temp = get_tile(pair<int, int>(rowIndex+1, colIndex+1));
 			neighborhoodValue += temp;
-			if(temp == 0)
+			if(temp == FLOOR)
 			{
 				isNextToFloor = 1;
 			}	
