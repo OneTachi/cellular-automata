@@ -51,7 +51,10 @@ Dungeon::Dungeon(int rows, int cols)
 	
 	// Set dungeon size
 	dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
+	temp_dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
+	// make_maze()
 }
+
 
 // Getters and Setters
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
@@ -75,7 +78,7 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		neighborhoodValue += temp;
 		//States the top is possibly valid
 		topValid = true;
-		if(temp == 0)
+		if(temp == FLOOR)
 		{
 			isNextToFloor = 1;
 		}
@@ -169,7 +172,7 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	int neighborhood = get_neighborhood(coords.first, coords.second);
 	
 	// If neighborhood has 4 or more walls, the current tile is a floor. Otherwise, it will be a wall.	
-	if (neighborhood >= 4) { set_temp_tile(coords, FLOOR); }
+	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
 	else { set_temp_tile(coords, WALL); }	
 }
 
@@ -190,9 +193,17 @@ void Dungeon::calculate_generation()
 
 
 
+
+
 //TODO 
 // print() -- Sidd
-// make basic functions for rules, only looks at individual cell! No calling iterively etc. -- Sidd
-// Repurpose get_neighborhood so that based on a integer given, gives either neighborhood or if there are any floors -- Rory 
-// Iterative thing -- FIGURE OUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Both
+// Finish calculate_generation -- Sidd
+// make_maze() -- Sidd 
+// Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
+// Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory 
+// Make get_neighborhood consider out of bounds as walls -- Rory
+// noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory
+//
+// Later: 
+// More cool custom stuff with apply_rule (more tiles, cooler ruleset)
 #endif
