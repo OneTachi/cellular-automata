@@ -27,6 +27,7 @@ public:
 	int get_temp_tile(pair<int, int>);
 
 	int get_neighborhood(int, int, int); // Get Moore Neighborhood
+	bool is_in_bounds(int, int);
 	void print();
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
@@ -62,102 +63,55 @@ void Dungeon::set_temp_tile(pair<int, int> coords, int value) { temp_dungeon[coo
 int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
 int Dungeon::get_temp_tile(pair<int, int> coords) { return temp_dungeon[coords.first][coords.second]; }
 
-//If val = 0 return isNextToFloor, else return neighborhoodTotalValue
+//Returns true if the given (x,y) coords are in the bounds of the dungeon, false otherwise
+bool Dungeon::is_in_bounds(int x, int y)
+{
+	if(x>=0 && x<num_rows && y>=0 && y<num_cols)
+	{
+		return true;
+	}
+	return false;
+}
+
+//If val = 0 return isNextToFloor, else return neighborhoodValue
 int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex) 
 {
+	//Note: Out of bounds will be considered a wall / not a floor 
 	int neighborhoodValue = 0;
-	int temp;
-	bool topValid = false;
-	bool bottomValid = false;
 	int isNextToFloor = 0;
-	//Cases where index of cell is at edge of dungeon
-	if(rowIndex > 0)
+	int temp;
+	//Row loop starting from above row going to below row
+	for(int i=rowIndex-1; i<=rowIndex+1; i++)
 	{
-		//Gets node directly above the starting node
-		temp = get_tile(pair<int, int>(rowIndex-1, colIndex));
-		neighborhoodValue += temp;
-		//States the top is possibly valid
-		topValid = true;
-		if(temp == FLOOR)
+		//Column loop starting from above col going to below col
+		for(int j=colIndex-1; j<=colIndex+1; j++)
 		{
-			isNextToFloor = 1;
-		}
-	}
-	if(rowIndex < num_rows)
-	{
-		//Gets node directly above the starting node
-		temp = get_tile(pair<int, int>(rowIndex+1, colIndex));
-		neighborhoodValue += temp;
-		//Says bottom is possibly valid
-		bottomValid = true;
-		if(temp == FLOOR)
-		{
-			isNextToFloor = 1;
-		}
-	}
-	if(colIndex > 0)
-	{
-		//Gets node directly left of the starting node
-		temp = get_tile(pair<int, int>(rowIndex, colIndex-1));
-		neighborhoodValue += temp;
-		if(temp == FLOOR)
-		{
-			isNextToFloor = 1;
-		}
-		//Checks for the top left node 
-		if(topValid)
-		{
-			temp = get_tile(pair<int, int>(rowIndex-1, colIndex-1));
-			neighborhoodValue += temp;
-			if(temp == FLOOR)
+			//Checks if index is in bounds
+			if(is_in_bounds(i,j))
 			{
-				isNextToFloor = 1;
+				//Makes sure is not counting the tile in its own neighborhood
+				if(i != rowIndex || j != colIndex)
+				{
+					//Gets the tile at the index, adds its value to the total, checks if it is a floor
+					temp = get_tile(pair<int, int>(i, j));
+					neighborhoodValue += temp;
+					if(temp == FLOOR)
+					{
+						isNextToFloor = 1;
+					}
+				}
 			}
-		}
-		//Checks for the bottom left node 
-		if(bottomValid)
-		{
-			temp = get_tile(pair<int, int>(rowIndex+1, colIndex-1));
-			neighborhoodValue += temp;
-			if(temp == 1)
+			else
 			{
-				isNextToFloor = 1;
+				//Considers out of bounds to be walls (currently adds 0, here in case we need to change what we consider out of bounds)
+				neighborhoodValue += WALL;
 			}
 		}
 	}
-	if(rowIndex < num_cols)
-	{
-		//Gets node directly right of the starting node
-		temp = get_tile(pair<int, int>(rowIndex, colIndex+1));
-		neighborhoodValue += temp;
-		if(temp == FLOOR)
-		{
-			isNextToFloor = 1;
-		}
-		//Checks for the top right node 
-		if(topValid)
-		{
-			temp = get_tile(pair<int, int>(rowIndex-1, colIndex+1));
-			neighborhoodValue += temp;
-			if(temp == FLOOR)
-			{
-				isNextToFloor = 1;
-			}
-		}
-		//Checks for the bottom right node 
-		if(bottomValid)
-		{
-			temp = get_tile(pair<int, int>(rowIndex+1, colIndex+1));
-			neighborhoodValue += temp;
-			if(temp == FLOOR)
-			{
-				isNextToFloor = 1;
-			}	
-		}
-	}
-	//If val = 0 return isNextToFloor, else return neighborhoodTotalValue
+	//If val = 0 return isNextToFloor, else return neighborhoodValue
 	if(val == 0)
 	{
+		//Returns 0 if false, 1 if true
 		return neighborhoodValue;
 	}
 	return isNextToFloor;
@@ -200,6 +154,7 @@ void Dungeon::calculate_generation()
 // Finish calculate_generation -- Sidd
 // make_maze() -- Sidd 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
+
 // Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory 
 // Make get_neighborhood consider out of bounds as walls -- Rory
 // noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory
