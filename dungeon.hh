@@ -7,6 +7,7 @@
 #define DUNGEON_HH
 
 #include <vector>
+#include <stdlib.h>
 
 //The value each cell starts with
 const int startingCellValue = 0;
@@ -31,6 +32,7 @@ public:
 	void print();
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
+	void noise_grid(int, int);
 	
 private:
 	vector<vector<int>> dungeon; // Row then column for access
@@ -125,6 +127,35 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		return neighborhoodValue;
 	}
 	return isNextToFloor;
+}
+
+//Generated the starting noise for the dungeon map 
+void Dungeon::noise_grid(int size, int ratio)
+{
+	//Expecting: Size>=0, Ratio between 1 and 100 
+	int comparer = 0;
+	//Makes sure the size is in bounds for both the rows and columns
+	if(size >= num_rows)
+	{
+		size = num_rows-1;
+	}
+	if(size >= num_cols)
+	{
+		size = num_cols-1;
+	}
+	//Loops through given size cube and created noise based on the given ratio 
+	for(int i=0; i<num_rows; i++)
+	{
+		for(int j=0; j<num_cols;j++)
+		{
+			//If (random number from 1-100 is >= ratio), then make tile floor 
+			comparer = rand() % (100+1);
+			if(comparer >= ratio)
+			{
+				set_tile(pair<int, int>(i, j), WALL);
+			}
+		}
+	}
 }
 
 /**
