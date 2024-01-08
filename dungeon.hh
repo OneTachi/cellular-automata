@@ -147,15 +147,15 @@ void Dungeon::noise_grid(int size, int ratio)
 		size = num_cols-1;
 	}
 	//Loops through given size cube and created noise based on the given ratio 
-	for(int i=0; i<num_rows; i++)
+	for(int i=0; i < size; i++)
 	{
-		for(int j=0; j<num_cols;j++)
+		for(int j=0; j < size;j++)
 		{
 			//If (random number from 1-100 is >= ratio), then make tile floor 
 			comparer = rand() % (100+1);
 			if(comparer >= ratio)
 			{
-				set_tile(pair<int, int>(i, j), WALL);
+				set_tile(pair<int, int>(i, j), FLOOR);
 			}
 		}
 	}
@@ -168,10 +168,10 @@ void Dungeon::noise_grid(int size, int ratio)
 void Dungeon::apply_rule(pair<int, int> coords)
 {
 	int neighborhood = get_neighborhood(1, coords.first, coords.second);
-	
-	// If neighborhood has 4 or more walls, the current tile is a floor. Otherwise, it will be a wall.	
-	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
-	else { set_temp_tile(coords, WALL); }	
+	cout << neighborhood << " ";	
+	// If neighborhood has 4 or more walls, the current tile is a wall. Otherwise, it will be a floor.	
+	if (neighborhood <= 4) { set_temp_tile(coords, WALL); }
+	else { set_temp_tile(coords, FLOOR); }	
 }
 
 void Dungeon::calculate_generation()
@@ -194,10 +194,14 @@ void Dungeon::calculate_generation()
                         set_tile(pair<int, int>(row, col), value); // Put value above into the dungeon grid
                 }
         }
+	cout << endl;
 }
 
 void Dungeon::make_maze()
 {
+	// Temporarily setting noise grid to by 10 x 10
+//	noise_grid(10, 50);
+
 	// Continue to create the next generation till the maximum amount
 	for (; time < generations; time++)
 	{

@@ -5,3 +5,7 @@ automata: dungeon.hh main.cpp
 
 clean: 
 	/bin/rm -rf *.o *~ automata
+
+test: dungeon.hh test.cpp
+	 g++ -std=c++11 test.cpp -o automata
+	./automata
