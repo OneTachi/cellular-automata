@@ -9,7 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
-
+#include <string.h>
 //The value each cell starts with
 const int startingCellValue = 0;
 
@@ -34,9 +34,9 @@ public:
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
 	void noise_grid(int, int);
-
-	void make_maze();
 	
+	void make_maze();
+	string str_maze(); // Get maze as string
 private:
 	vector<vector<int>> dungeon; // Row then column for access
 	vector<vector<int>> temp_dungeon; // Our temporary grid for each generation
@@ -70,6 +70,21 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 	
 	//May have to change this call depending on how stuff is ordered
 	// make_maze(generations)
+}
+
+string Dungeon::str_maze()
+{
+	string result = "";
+	for (int row = 0; row < num_rows; row++)
+	{
+		for (int col = 0; col < num_cols; col++)
+		{
+			char tile = '0' + get_tile(pair<int, int>(row, col));
+			result += tile;
+		}
+		result += " ";
+	}
+	return result;
 }
 
 
