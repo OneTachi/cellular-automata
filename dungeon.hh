@@ -68,8 +68,7 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 		}
 	}
 	
-	//May have to change this call depending on how stuff is ordered
-	// make_maze(generations)
+	//make_maze()
 }
 
 string Dungeon::str_maze()
@@ -254,7 +253,7 @@ void Dungeon::print()
 
 // Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory [Currently Done, will need updating]
 // Make get_neighborhood consider out of bounds as walls -- Rory [Done]
-// noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory
+// noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory [Done]
 //
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
