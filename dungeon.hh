@@ -109,12 +109,12 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 	//Note: Out of bounds will be considered a wall / not a floor 
 	int neighborhoodValue = 0;
 	int isNextToFloor = 0;
-	int temp;
+	int temp = 0;
 	//Row loop starting from above row going to below row
-	for(int i=rowIndex-1; i<=rowIndex+1; i++)
+	for(int i=(rowIndex-1); i<=(rowIndex+1); i++)
 	{
 		//Column loop starting from above col going to below col
-		for(int j=colIndex-1; j<=colIndex+1; j++)
+		for(int j=(colIndex-1); j<=(colIndex+1); j++)
 		{
 			//Checks if index is in bounds
 			if(is_in_bounds(i,j))
@@ -142,9 +142,16 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 	if(val == 0)
 	{
 		//Returns 0 if false, 1 if true
+		return isNextToFloor;
+	}
+	else if (val == 1)
+	{
 		return neighborhoodValue;
 	}
-	return isNextToFloor;
+	else 
+	{
+		return -1;
+	}
 }
 
 //Generated the starting noise for the dungeon map 
@@ -162,9 +169,9 @@ void Dungeon::noise_grid(int size, int ratio)
 		size = num_cols-1;
 	}
 	//Loops through given size cube and created noise based on the given ratio 
-	for(int i=0; i < size; i++)
+	for(int i=0; i <= size; i++)
 	{
-		for(int j=0; j < size;j++)
+		for(int j=0; j <= size; j++)
 		{
 			//If (random number from 1-100 is >= ratio), then make tile floor 
 			comparer = rand() % (100+1);
@@ -183,7 +190,7 @@ void Dungeon::noise_grid(int size, int ratio)
 void Dungeon::apply_rule(pair<int, int> coords)
 {
 	int neighborhood = get_neighborhood(1, coords.first, coords.second);
-	cout << neighborhood << " ";	
+	//cout << neighborhood << " ";	
 	// If neighborhood has 4 or more walls, the current tile is a wall. Otherwise, it will be a floor.	
 	if (neighborhood <= 4) { set_temp_tile(coords, WALL); }
 	else { set_temp_tile(coords, FLOOR); }	
@@ -209,7 +216,7 @@ void Dungeon::calculate_generation()
                         set_tile(pair<int, int>(row, col), value); // Put value above into the dungeon grid
                 }
         }
-	cout << endl;
+	//cout << endl;
 }
 
 void Dungeon::make_maze()
