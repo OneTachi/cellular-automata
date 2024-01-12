@@ -34,8 +34,8 @@ public:
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
 	void noise_grid(int, int);
-	
 	void make_maze();
+
 	string str_maze(); // Get maze as string
 private:
 	vector<vector<int>> dungeon; // Row then column for access
@@ -189,10 +189,10 @@ void Dungeon::noise_grid(int size, int ratio)
 void Dungeon::apply_rule(pair<int, int> coords)
 {
 	int neighborhood = get_neighborhood(1, coords.first, coords.second);
-	//cout << neighborhood << " ";	
-	// If neighborhood has 4 or more walls, the current tile is a wall. Otherwise, it will be a floor.	
-	if (neighborhood <= 4) { set_temp_tile(coords, WALL); }
-	else { set_temp_tile(coords, FLOOR); }	
+	cout << neighborhood << " ";
+	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
+	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
+	else { set_temp_tile(coords, WALL); }	
 }
 
 void Dungeon::calculate_generation()
@@ -246,15 +246,10 @@ void Dungeon::print()
 
 
 //TODO 
-// print() -- Sidd
-// Finish calculate_generation -- Sidd
-// make_maze() -- Sidd 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
-
-// Add to Dungeon constructor (generation + call make_maze, all values of starting grid will be WALL) -- Rory [Currently Done, will need updating]
-// Make get_neighborhood consider out of bounds as walls -- Rory [Done]
-// noise_grid(length, ratio) | grid will always spawn top left & don't forget about considering too big of a noise grid | If want fancy fancy, put location in center -- Rory [Done]
+// Testing -- Both, Test other person's functions! 
 //
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
+// Calculate runtime with Big O Notation and its actual runtime (f function)
 #endif
