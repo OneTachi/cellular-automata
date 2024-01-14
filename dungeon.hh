@@ -22,6 +22,7 @@ class Dungeon
 {
 public:	
 	Dungeon(int, int, int);
+	Dungeon(string); // Create fixed dungeon (Debug)
 	
 	void set_tile(pair<int, int>, int);
 	void set_temp_tile(pair<int, int>, int); // Set tile for temporary grid
@@ -37,6 +38,7 @@ public:
 	void make_maze();
 
 	string str_maze(); // Get maze as string
+
 private:
 	vector<vector<int>> dungeon; // Row then column for access
 	vector<vector<int>> temp_dungeon; // Our temporary grid for each generation
@@ -45,6 +47,37 @@ private:
 	int time = 0; // The current generation we are on
 	int generations = 0; // Number of generations we would like to go up to
 };
+
+/*
+ * Constructor is used for debugging. 
+ * Creates a fixed maze based on string --> For example: "11 10" creates 
+ * 1 1
+ * 1 0
+ * Note: Do not add a space at the end of the string. Spaces indicate new row to insert into. 
+ */
+Dungeon::Dungeon(string maze)
+{
+	dungeon = vector<vector<int>>(1, vector<int>()); // Since I don't know the size of the dungeon, I'll dynamically allocate it
+	int col = 0;
+	int row = 0;
+	// Iterate through string
+	for (int character = 0; character < maze.length(); character++, col++)
+	{
+		// If its a space character, start inserting onto the next row. Otherwise, put value into dungeon.
+		if (maze[character] != ' ')
+		{
+			dungeon[row].push_back(maze[character] - '0'); // Assumes you use the right wall/floor integers.	
+		}
+		else
+		{
+			dungeon.push_back(vector<int>());
+			row++;
+			col = -1;
+		}
+	}
+	num_rows = row + 1;
+	num_cols = col;
+}
 
 Dungeon::Dungeon(int rows, int cols, int generationGoal)
 {
@@ -71,6 +104,13 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 	//make_maze()
 }
 
+/*
+ * Utility function that outputs the maze as a string.
+ * Numbers grouped together indicate a row. Spaces indicate the next row in the dungeon. 
+ * If we returned "10 01" this is equivalent to the dungeon:
+ * 1 0
+ * 0 1 
+ */
 string Dungeon::str_maze()
 {
 	string result = "";
@@ -252,4 +292,5 @@ void Dungeon::print()
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
 // Calculate runtime with Big O Notation and its actual runtime (f function)
+// Make maze print prettier
 #endif
