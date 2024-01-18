@@ -13,6 +13,12 @@ void test_less_out_bounds();
 void test_in_first_bound();
 void test_in_last_bound();
 
+void test_neigh_no_floor();
+void test_neigh_up_floor();
+void test_neigh_all_floor();
+void test_neigh_bounds();
+void test_neigh_tile();
+
 int main()
 {
 	/*	
@@ -33,6 +39,13 @@ int main()
 	test_less_out_bounds();
 	test_in_first_bound();
 	test_in_last_bound();
+
+	test_neigh_no_floor();
+	test_neigh_up_floor();
+	test_neigh_all_floor();
+	test_neigh_bounds();
+	test_neigh_tile(); 
+
 	return 0;	
 }
 
@@ -77,4 +90,32 @@ void test_in_last_bound()
 	Dungeon dun("00 00");
 	assert(dun.is_in_bounds(1, 1));
 }
+void test_neigh_no_floor()
+{
+	Dungeon dun("000 000 000");
+	assert(dun.get_neighborhood(1, 1, 1) == 0);
+}
+void test_neigh_up_floor()
+{
+	Dungeon dun("010 000 000");
+        assert(dun.get_neighborhood(1, 1, 1) == 1);
+}
+void test_neigh_all_floor()
+{
+        Dungeon dun("111 101 111");
+        assert(dun.get_neighborhood(1, 1, 1) == 8);
+}
+
+void test_neigh_bounds()
+{
+        Dungeon dun("0");
+        assert(dun.get_neighborhood(1, 0, 0) == 0);
+}
+void test_neigh_tile()
+{
+        Dungeon dun("1");
+        assert(dun.get_neighborhood(1, 0, 0) == 0);
+}
+
+
 
