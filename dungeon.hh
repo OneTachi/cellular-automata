@@ -79,6 +79,7 @@ Dungeon::Dungeon(string maze)
 	}
 	num_rows = row + 1;
 	num_cols = col;
+	temp_dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
 }
 
 Dungeon::Dungeon(int rows, int cols, int generationGoal)
@@ -132,7 +133,7 @@ string Dungeon::str_maze()
 // Getters and Setters
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
 void Dungeon::set_temp_tile(pair<int, int> coords, int value) { temp_dungeon[coords.first][coords.second] = value; }
-void Dungeon::set_generations(int gen) {this->generations = gen; }
+void Dungeon::set_generations(int gen) {generations = gen; }
 int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
 int Dungeon::get_temp_tile(pair<int, int> coords) { return temp_dungeon[coords.first][coords.second]; }
 int Dungeon::get_generations() {return this->generations; }
