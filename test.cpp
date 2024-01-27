@@ -19,8 +19,11 @@ void test_neigh_all_floor();
 void test_neigh_bounds();
 void test_neigh_tile();
 
+void test_apply_rule();
+
 int main()
 {
+	cout <<"Starting Testing!"<<endl;
 	/*	
 	Dungeon dungeon(10, 10, 2);
 	dungeon.noise_grid(10, 50);
@@ -45,7 +48,10 @@ int main()
 	test_neigh_all_floor();
 	test_neigh_bounds();
 	test_neigh_tile(); 
-
+	
+	test_apply_rule();
+	
+	cout <<"Finished Testing!"<<endl;
 	return 0;	
 }
 
@@ -119,3 +125,40 @@ void test_neigh_tile()
 
 
 
+void test_apply_rule()
+{
+	
+	Dungeon test1("0");
+	
+	test1.set_generations(1);
+	test1.make_maze();
+	//assert(test1.get_tile(pair<int, int>(0,0)) == 0);
+	
+	/*
+	Dungeon test2("000 000 000");
+	test2.set_generations(1);
+	test2.make_maze();
+	assert(test2.get_tile(pair<int, int>(0,0)) == 0);
+	assert(test2.get_tile(pair<int, int>(0,1)) == 0);
+	assert(test2.get_tile(pair<int, int>(0,2)) == 0);
+	assert(test2.get_tile(pair<int, int>(1,0)) == 0);
+	assert(test2.get_tile(pair<int, int>(1,1)) == 0);
+	assert(test2.get_tile(pair<int, int>(1,2)) == 0);
+	assert(test2.get_tile(pair<int, int>(2,0)) == 0);
+	assert(test2.get_tile(pair<int, int>(2,1)) == 0);
+	assert(test2.get_tile(pair<int, int>(2,2)) == 0);
+	/*
+	Dungeon test3("111 111 111");
+	test3.set_generations(1);
+	test3.make_maze();
+	assert(test3.get_tile(pair<int, int>(0,0)) == 1);
+	assert(test3.get_tile(pair<int, int>(0,1)) == 1);
+	assert(test3.get_tile(pair<int, int>(0,2)) == 1);
+	assert(test3.get_tile(pair<int, int>(1,0)) == 1);
+	assert(test3.get_tile(pair<int, int>(1,1)) == 1);
+	assert(test3.get_tile(pair<int, int>(1,2)) == 1);
+	assert(test3.get_tile(pair<int, int>(2,0)) == 1);
+	assert(test3.get_tile(pair<int, int>(2,1)) == 1);
+	assert(test3.get_tile(pair<int, int>(2,2)) == 1);
+	*/
+}

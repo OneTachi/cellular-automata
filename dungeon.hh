@@ -26,8 +26,10 @@ public:
 	
 	void set_tile(pair<int, int>, int);
 	void set_temp_tile(pair<int, int>, int); // Set tile for temporary grid
+	void set_generations(int);
 	int get_tile(pair<int, int>);
 	int get_temp_tile(pair<int, int>);
+	int get_generations();
 
 	int get_neighborhood(int, int, int); // Get Moore Neighborhood
 	bool is_in_bounds(int, int);
@@ -130,8 +132,10 @@ string Dungeon::str_maze()
 // Getters and Setters
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
 void Dungeon::set_temp_tile(pair<int, int> coords, int value) { temp_dungeon[coords.first][coords.second] = value; }
+void Dungeon::set_generations(int gen) {this->generations = gen; }
 int Dungeon::get_tile(pair<int, int> coords) { return dungeon[coords.first][coords.second]; }
 int Dungeon::get_temp_tile(pair<int, int> coords) { return temp_dungeon[coords.first][coords.second]; }
+int Dungeon::get_generations() {return this->generations; }
 
 //Returns true if the given (x,y) coords are in the bounds of the dungeon, false otherwise
 bool Dungeon::is_in_bounds(int x, int y)
@@ -247,15 +251,14 @@ void Dungeon::calculate_generation()
 	}
 
 	// Copy temp grid to dungeon grid
-        for (int row = 0; row < num_rows; row++)
+    for (int row = 0; row < num_rows; row++)
+    {
+        for (int col = 0; col < num_cols; col++)
         {
-                for (int col = 0; col < num_cols; col++)
-                {
 			int value = get_temp_tile(pair<int, int>(row, col)); // Get value from temporary grid
-                        set_tile(pair<int, int>(row, col), value); // Put value above into the dungeon grid
-                }
+            set_tile(pair<int, int>(row, col), value); // Put value above into the dungeon grid
         }
-	//cout << endl;
+    }
 }
 
 void Dungeon::make_maze()
