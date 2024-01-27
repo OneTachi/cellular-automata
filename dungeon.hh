@@ -291,10 +291,12 @@ void Dungeon::print()
 
 //TODO 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
-// Testing -- Both, Test other person's functions! 
+// Pretty_print(): Make the resulting dungeon look more like a dungeon when printed out. Do not make a new function, instead have print() accept a boolean that is default to true, if bool = true do pretty_print. If false, goes to 
+// already established print() -- Rory
+// Test bigger dungeons and see if they look like dungeons! -- Both
 //
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
 // Calculate runtime with Big O Notation and its actual runtime (f function)
-// Make maze print prettier
+// Choose where noise grid does its noise grid stuff (coordinates/general location etc.)
 #endif
