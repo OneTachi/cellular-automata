@@ -19,6 +19,15 @@ void test_neigh_all_floor();
 void test_neigh_bounds();
 void test_neigh_tile();
 
+// Does not completely test all cardinal directions.
+void test_nextto_all_floor();
+void test_nextto_no_floor();
+void test_nextto_no_isfloor();
+void test_nextto_diagonal_floor();
+
+void test_noise_all();
+void test_noise_one();
+
 void test_apply_rule();
 
 int main()
@@ -47,8 +56,16 @@ int main()
 	test_neigh_up_floor();
 	test_neigh_all_floor();
 	test_neigh_bounds();
-	test_neigh_tile(); 
+	test_neigh_tile();
+
+	test_nextto_all_floor();
+	test_nextto_no_floor();
+	test_nextto_no_isfloor();
+	test_nextto_diagonal_floor();
 	
+	test_noise_all();
+	test_noise_one();
+
 	test_apply_rule();
 	
 	cout <<"Finished Testing!"<<endl;
@@ -122,6 +139,43 @@ void test_neigh_tile()
         Dungeon dun("1");
         assert(dun.get_neighborhood(1, 0, 0) == 0);
 }
+void test_nextto_all_floor()
+{
+	Dungeon dun("111 101 111");
+	assert(dun.get_neighborhood(0, 1, 1) == 1);
+}
+void test_nextto_no_floor()
+{
+        Dungeon dun("000 000 000");
+        assert(dun.get_neighborhood(0, 1, 1) == 0);
+}
+void test_nextto_no_isfloor()
+{
+        Dungeon dun("000 010 000");
+        assert(dun.get_neighborhood(0, 1, 1) == 0);
+}
+void test_nextto_diagonal_floor()
+{
+        Dungeon dun("100 000 000");
+        assert(dun.get_neighborhood(0, 1, 1) == 1);
+}
+void test_noise_all()
+{
+	Dungeon dun(3, 3, 1);
+	dun.noise_grid(3, 0);
+	assert(dun.get_tile(pair<int, int>(0, 0)) == 1);
+        assert(dun.get_tile(pair<int, int>(2, 2)) == 1);
+}
+void test_noise_one()
+{
+        Dungeon dun(3, 3, 1);
+        dun.noise_grid(1, 0);
+        assert(dun.get_tile(pair<int, int>(0, 0)) == 1);
+}
+
+
+
+
 
 
 
