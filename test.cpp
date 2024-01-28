@@ -29,6 +29,7 @@ void test_noise_all();
 void test_noise_one();
 
 void test_apply_rule();
+void test_print();
 
 int main()
 {
@@ -67,6 +68,7 @@ int main()
 	test_noise_one();
 
 	test_apply_rule();
+	test_print();
 	
 	cout <<"Finished Testing!"<<endl;
 	return 0;	
@@ -173,12 +175,6 @@ void test_noise_one()
         assert(dun.get_tile(pair<int, int>(0, 0)) == 1);
 }
 
-
-
-
-
-
-
 void test_apply_rule()
 {
 	
@@ -213,4 +209,25 @@ void test_apply_rule()
 	assert(test3.get_tile(pair<int, int>(2,1)) == 0);
 	assert(test3.get_tile(pair<int, int>(2,2)) == 1);
 	
+}
+void test_print()
+{
+	cout << "Maze 1: " << endl;
+	Dungeon testPrint1("000 000 000");
+	testPrint1.print();
+	cout << "Maze 2: " << endl;
+	Dungeon testPrint2("111 111 111");
+	testPrint2.print();
+	cout << "Maze 3: " << endl;
+	Dungeon testPrint3("000 111 000");
+	testPrint3.print();
+	cout << "Maze 4: " << endl;
+	Dungeon testPrint4("111 000 111");
+	testPrint4.print();
+	cout << "Maze 5: " << endl;
+	Dungeon testPrint5("111 101 111");
+	testPrint5.print();
+	cout << "Maze 6: " << endl;
+	Dungeon testPrint6("000 010 000");
+	testPrint6.print();
 }

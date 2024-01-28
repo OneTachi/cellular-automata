@@ -10,6 +10,11 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
+
+#include <io.h>
+#include <fcntl.h>
+#include <stdio.h>
+
 //The value each cell starts with
 const int startingCellValue = 0;
 
@@ -234,10 +239,11 @@ void Dungeon::noise_grid(int size, int ratio)
 void Dungeon::apply_rule(pair<int, int> coords)
 {
 	int neighborhood = get_neighborhood(1, coords.first, coords.second);
-	cout << neighborhood << " ";
+	//cout << neighborhood << " ";
 	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
 	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
 	else { set_temp_tile(coords, WALL); }	
+	//cout << "" << endl;
 }
 
 void Dungeon::calculate_generation()
@@ -281,10 +287,34 @@ void Dungeon::print()
 		for (int col = 0; col < num_cols; col++)
 		{
 			int value = get_tile(pair<int, int>(row, col));
-			cout << value << " ";
+			if(value == WALL)
+			{
+				//_setmode(_fileno(stdout), _O_U16TEXT);
+				//Extended ASCII table code for filled in box
+				cout << (char)254u;
+			}
+			else if(value == FLOOR)
+			{
+				cout << " ";
+			}
 		}
 		cout << endl;
 	}
+	
+	/*
+	if()
+	{
+		for (int row = 0; row < num_rows; row++)
+		{
+			for (int col = 0; col < num_cols; col++)
+			{
+				int value = get_tile(pair<int, int>(row, col));
+				cout << value << " ";
+			}
+			cout << endl;
+		}
+	}
+	*/
 }
 
 
