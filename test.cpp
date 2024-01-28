@@ -230,4 +230,7 @@ void test_print()
 	cout << "Maze 6: " << endl;
 	Dungeon testPrint6("000 010 000");
 	testPrint6.print();
+	cout << "Maze 7: " << endl;
+	Dungeon testPrint7("00000 01110 01010 01110 00000");
+	testPrint7.print();
 }

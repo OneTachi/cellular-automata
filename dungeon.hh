@@ -10,7 +10,7 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
-
+//Used for extended Unicoe (possibly, not in use currently)
 #include <io.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -108,8 +108,6 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 			set_tile(pair<int,int>(i,j), WALL);
 		}
 	}
-	
-	//make_maze()
 }
 
 /*
@@ -133,7 +131,6 @@ string Dungeon::str_maze()
 	}
 	return result;
 }
-
 
 // Getters and Setters
 void Dungeon::set_tile(pair<int, int> coords, int value) { dungeon[coords.first][coords.second] = value; }
@@ -271,7 +268,7 @@ void Dungeon::calculate_generation()
 void Dungeon::make_maze()
 {
 	// Temporarily setting noise grid to by 10 x 10
-//	noise_grid(10, 50);
+	// noise_grid(10, 50);
 
 	// Continue to create the next generation till the maximum amount
 	for (; time < generations; time++)
