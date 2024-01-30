@@ -3,28 +3,28 @@ NAME: Rory and Sidd
 THIS IS CELLULAR AUTOMATA -> What it is
 	
 
--> How we used it (dungeon generation)
+--> How we used it (dungeon generation)
 	We start by generating a grid (dungeon) of a set size. This dungeon is filled entirely with walls.
 	Then, we generate random "noise" in the top left of the dungeon. This noise flips random tiles from 
 	walls to floors. Then, a set of rules is applied to the whole dungeon. This causes the floors to spread 
 	outwards and, with enough generations, form something that looks like a dungeon. 
 --> Our ruleset
 	If a tile has: 
-	0 neighbors that are floors then nothing happens, 
-	Between 1 and 4 neighbors that are floors then tile becomes a Floor, 
-	5 to 8 neighbors that are floors then tile becomes a wall
+		-> 0 neighbors that are floors then nothing happens, 
+		-> Between 1 and 4 neighbors that are floors then tile becomes a Floor, 
+		-> 5 to 8 neighbors that are floors then tile becomes a wall
 	We found if we changed the first two rules we could create a maze
-	If we only had a tile become a floor with exactly three neighboring floors, and do nothing when
-	it had 0,1,2,or 4 neighbors then it would look like a maze. 
+		-> If we only had a tile become a floor with exactly three neighboring floors, and do nothing when
+		-> it had 0,1,2,or 4 neighbors then it would look like a maze. 
+--> Findings/Limitations
+	-> This doesn't work without any noise, however it will work with just a single pixel that is floor. 
+	-> Noise is set always to spawn in a square and in the top left corner. 
+	-> Printing could look cleaner if we could implement a full box character for walls. 
+	-> The dungeon expands in generations. We can watch the rulset be implemented once we set the noise.
+	-> This lets us observe patterns in the generation, and see how it could be tweaked for different uses.
 
--> Findings/Limitations
- --> This doesn't work without any noise, however it will work with just a single pixel that is floor. 
- --> Noise is set always to spawn in a square and in the top left corner. 
- --> Printing could look cleaner if we could implement a full box character for walls. 
- --> 
- --> Generations, how it expands
+--> How we made it, ruleset, our first ruleset, changes we did to it to get dungeon generation vs maze generation
 
--> How we made it, ruleset, our first ruleset, changes we did to it to get dungeon generation vs maze generation
--> Videos we used
-
+--> Videos we used
+	
 --> How to use it
