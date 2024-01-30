@@ -10,10 +10,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
-//Used for extended Unicoe (possibly, not in use currently)
-// #include <io.h>
-//#include <fcntl.h>
-//#include <stdio.h>
 
 //The value each cell starts with
 const int startingCellValue = 0;
