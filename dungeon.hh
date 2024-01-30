@@ -251,11 +251,11 @@ void Dungeon::noise_grid(int size, int ratio)
 {
 	int comparer = 0;
 	//Makes sure the size is in bounds for both the rows and columns
-	if(size >= num_rows)
+	if(size > num_rows)
 	{
 		size = num_rows-1;
 	}
-	if(size >= num_cols)
+	if(size > num_cols)
 	{
 		size = num_cols-1;
 	}
