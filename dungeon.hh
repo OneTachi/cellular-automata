@@ -314,9 +314,9 @@ void Dungeon::make_maze()
 
 void Dungeon::print(bool pretty)
 {
-	/*
-	if(pretty)
-	{
+	
+	//if(pretty)
+	//{
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -334,11 +334,11 @@ void Dungeon::print(bool pretty)
 				}
 			}
 			cout << endl;
-		}
+	//	}
 	}
-	else
+	/**else
 	{
-		*/
+		
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -348,7 +348,7 @@ void Dungeon::print(bool pretty)
 			}
 			cout << endl;
 		}
-	//}
+	}*/
 	
 }
 
