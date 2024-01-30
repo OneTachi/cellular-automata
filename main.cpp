@@ -5,7 +5,7 @@ int main(int argc, char* argv[])
 {
 	if (argc == 1)
 	{
-		Dungeon dun(100, 100, 500, 20, 50);
+		Dungeon dun(100, 100, 500, 1, 0);
 		return 1;
 	}
 	if (argc < 6 || argc > 7)

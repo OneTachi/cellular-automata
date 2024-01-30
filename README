@@ -1,0 +1,14 @@
+NAME:
+
+THIS IS CELLULAR AUTOMATA -> What it is
+
+-> How we used it (dungeon generation)
+
+-> Findings/Limitations
+ --> This doesn't work without any noise, however it will work with just a single pixel that is wall. 
+ --> Generations, how it expands
+
+-> How we made it, ruleset, our first ruleset, changes we did to it to get dungeon generation vs maze generation
+-> Videos we used
+
+--> How to use it
