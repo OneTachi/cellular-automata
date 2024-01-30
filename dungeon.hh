@@ -244,9 +244,9 @@ void Dungeon::noise_grid(int size, int ratio)
 		size = num_cols-1;
 	}
 	//Loops through given size cube and created noise based on the given ratio 
-	for(int i=0; i <= size; i++)
+	for(int i=0; i < size; i++)
 	{
-		for(int j=0; j <= size; j++)
+		for(int j=0; j < size; j++)
 		{
 			//If (random number from 1-100 is >= ratio), then make tile floor 
 			comparer = rand() % (100+1);
@@ -269,7 +269,7 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
 	if (neighborhood <= 4) 
 	{ 
-		if(neighborhood == 3)
+		if(neighborhood > 0)
 		{
 			set_temp_tile(coords, FLOOR); 
 		}
