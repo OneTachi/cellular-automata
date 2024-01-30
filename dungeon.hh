@@ -269,7 +269,7 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
 	if (neighborhood <= 4) 
 	{ 
-		if(neighborhood == 3)
+		if(neighborhood > 0)
 		{
 			set_temp_tile(coords, FLOOR); 
 		}
