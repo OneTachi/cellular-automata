@@ -1,6 +1,6 @@
 NAME: Rory and Sidd
 
-THIS IS CELLULAR AUTOMATA
+Cellular Automata -
 	
 -> How we used it (dungeon generation)
 	Cellular Automata is used in a variety of different ways from studying fluid dynamics to creating generative music.
@@ -27,7 +27,7 @@ THIS IS CELLULAR AUTOMATA
 		between walls. Printing could look cleaner if we could implement a full box character for walls. 
 	-> The dungeon expands in generations. We can watch the rulset be implemented once we set the noise.
 	-> This lets us observe patterns in the generation, and see how it could be tweaked for different uses.
-
+	-> Computation for this algorithm is O(n^2) where n = rows/cols assuming rows = cols. This is because the algorithm applies a rule to every cell in the grid. 
 -> Process
 	We started by creating the basics: just a grid with 1's and 0's. We then created a function to get a certain tiles
 	neighborhood, since that was often used in example cellular automata rulesets. Following this we decided on a basic 
