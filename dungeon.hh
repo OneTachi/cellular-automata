@@ -127,11 +127,11 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal, int noise_size, int rat
         //Sets all tiles in the dungeon to WALLs
         for(int i=0; i<num_rows; i++)
         {
-                for(int j=0; j<num_cols; j++)
-                {
-                        set_tile(pair<int,int>(i,j), WALL);
-                }
-        }
+            for(int j=0; j<num_cols; j++)
+            {
+                set_tile(pair<int,int>(i,j), WALL);
+            }
+    }
 	noise_grid(noise_size, ratio);
 	make_maze();
 	print(pretty);
@@ -267,7 +267,13 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	int neighborhood = get_neighborhood(1, coords.first, coords.second);
 	//cout << neighborhood << " ";
 	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
-	if (neighborhood <= 4) { set_temp_tile(coords, FLOOR); }
+	if (neighborhood <= 4) 
+	{ 
+		if(neighborhood == 3)
+		{
+			set_temp_tile(coords, FLOOR); 
+		}
+	}
 	else { set_temp_tile(coords, WALL); }	
 	//cout << "" << endl;
 }
@@ -308,29 +314,31 @@ void Dungeon::make_maze()
 
 void Dungeon::print(bool pretty)
 {
-	/**
-	for (int row = 0; row < num_rows; row++)
+	/*
+	if(pretty)
 	{
-		for (int col = 0; col < num_cols; col++)
+		for (int row = 0; row < num_rows; row++)
 		{
-			int value = get_tile(pair<int, int>(row, col));
-			if(value == WALL)
+			for (int col = 0; col < num_cols; col++)
 			{
-				//_setmode(_fileno(stdout), _O_U16TEXT);
-				//Extended ASCII table code for filled in box
-				cout << (char)254u;
+				int value = get_tile(pair<int, int>(row, col));
+				if(value == WALL)
+				{
+					//_setmode(_fileno(stdout), _O_U16TEXT);
+					//Extended ASCII table code for filled in box
+					cout << (char)254u;
+				}
+				else if(value == FLOOR)
+				{
+					cout << " ";
+				}
 			}
-			else if(value == FLOOR)
-			{
-				cout << " ";
-			}
+			cout << endl;
 		}
-		cout << endl;
 	}
-	*/	
-	
-//	if()
-//	{
+	else
+	{
+		*/
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -340,7 +348,7 @@ void Dungeon::print(bool pretty)
 			}
 			cout << endl;
 		}
-//	}
+	//}
 	
 }
 
