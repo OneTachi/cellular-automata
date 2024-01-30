@@ -166,7 +166,7 @@ void test_noise_all()
 	Dungeon dun(3, 3, 0);
 	dun.noise_grid(3, 0);
 	assert(dun.get_tile(pair<int, int>(0, 0)) == 1);
-    	assert(dun.get_tile(pair<int, int>(2, 2)) == 1);
+    assert(dun.get_tile(pair<int, int>(2, 2)) == 1);
 }
 void test_noise_one()
 {

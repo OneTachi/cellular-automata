@@ -373,7 +373,7 @@ void Dungeon::print(bool pretty)
 //TODO 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
 // Test bigger dungeons and see if they look like dungeons! -- Both
-// Comments / Readme / Pretty Print
+// Readme
 //
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
