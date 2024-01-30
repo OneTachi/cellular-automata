@@ -10,10 +10,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
-//Used for extended Unicoe (possibly, not in use currently)
-// #include <io.h>
-#include <fcntl.h>
-#include <stdio.h>
 
 //The value each cell starts with
 const int startingCellValue = 0;
@@ -315,8 +311,8 @@ void Dungeon::make_maze()
 void Dungeon::print(bool pretty)
 {
 	
-	//if(pretty)
-	//{
+	if(pretty)
+	{
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -324,7 +320,6 @@ void Dungeon::print(bool pretty)
 				int value = get_tile(pair<int, int>(row, col));
 				if(value == WALL)
 				{
-					//_setmode(_fileno(stdout), _O_U16TEXT);
 					//Extended ASCII table code for filled in box
 					cout << (char)254u;
 				}
@@ -334,9 +329,9 @@ void Dungeon::print(bool pretty)
 				}
 			}
 			cout << endl;
-	//	}
+		}
 	}
-	/**else
+	else
 	{
 		
 		for (int row = 0; row < num_rows; row++)
@@ -348,7 +343,7 @@ void Dungeon::print(bool pretty)
 			}
 			cout << endl;
 		}
-	}*/
+	}
 	
 }
 
