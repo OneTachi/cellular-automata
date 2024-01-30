@@ -373,7 +373,6 @@ void Dungeon::print(bool pretty)
 			cout << endl;
 		}
 	}
-	
 }
 
 
