@@ -11,7 +11,8 @@ THIS IS CELLULAR AUTOMATA -> What it is
 	Then, we generate random "noise" in the top left of the dungeon. This noise flips random tiles from 
 	walls to floors. Then, a set of rules is applied to the whole dungeon. This causes the floors to spread 
 	outwards and, with enough generations, form something that looks like a dungeon. 
---> Our ruleset
+
+-> Our ruleset
 	If a tile has: 
 		-> 0 neighbors that are floors then nothing happens, 
 		-> Between 1 and 4 neighbors that are floors then tile becomes a Floor, 
@@ -19,13 +20,15 @@ THIS IS CELLULAR AUTOMATA -> What it is
 	We found if we changed the first two rules we could create a maze
 		-> If we only had a tile become a floor with exactly three neighboring floors, and do nothing when
 		-> it had 0,1,2,or 4 neighbors then it would look like a maze. 
---> Findings/Limitations
+
+-> Findings/Limitations
 	-> This doesn't work without any noise, however it will work with just a single pixel that is floor. 
 	-> Noise is set always to spawn in a square and in the top left corner. 
 	-> Printing could look cleaner if we could implement a full box character for walls. 
 	-> The dungeon expands in generations. We can watch the rulset be implemented once we set the noise.
 	-> This lets us observe patterns in the generation, and see how it could be tweaked for different uses.
---> How we made it, ruleset, our first ruleset, changes we did to it to get dungeon generation vs maze generation
+
+-> Process
 	We started by creating the basics: just a grid with 1's and 0's. We then created a function to get a certain tiles
 	neighborhood, since that was often used in example cellular automata rulesets. Following this we decided on a basic 
 	ruleset: If a tile had between 0 and 4 neighboring floor tiles: it was a floor, otherwise it was a wall. This ruleset
@@ -44,9 +47,15 @@ THIS IS CELLULAR AUTOMATA -> What it is
 	Cellular Automata | Procedural Generation | Game Development Tutorial by White Box Dev
 	https://youtu.be/slTEz6555Ts?si=vtwz1Gsq6WvsxDBX
 	
-
 -> How to run the program
 	If you haven't already, install Make onto your system! 
 	
 	Clone the repository and compile the code by typing `make` onto your terminal/console.
-	Then type in `./automata` to run a stock dungeon.   
+	Then type in `./automata` to run a stock dungeon.
+	
+	You can customize your dungeon like this:
+	`./automata rows cols generations noise_grid_size ratio` -- Note: Use only integers. Higher generations and size (rows/cols) will increase computation time, especially size.
+	Ratio is a number 0-100 with 100 creating a floor no matter what in the noise grid. 
+
+	If you are on linux or would like to see the grid without the space between rows do:
+	`/automata rows cols generations noise_grid_size ratio 0` 

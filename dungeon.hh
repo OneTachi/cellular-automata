@@ -10,7 +10,6 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 //The value each cell starts with
 const int startingCellValue = 0;
 
@@ -249,7 +248,6 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 */
 void Dungeon::noise_grid(int size, int ratio)
 {
-	srand(time(NULL));
 	int comparer = 0;
 	//Makes sure the size is in bounds for both the rows and columns
 	if(size > num_rows)
