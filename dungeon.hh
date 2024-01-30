@@ -10,12 +10,13 @@
 #include <vector>
 #include <stdlib.h>
 #include <string.h>
-//The value each cell starts with
-const int startingCellValue = 0;
 
 // We will keep this simple, a floor and a wall. 1 & 0 will allow us to easily calculate the moore's neighborhood and determine # of floors/walls
 const int FLOOR = 1; 
 const int WALL = 0;
+
+//The value each cell starts with
+const int startingCellValue = WALL;
 
 using namespace std; 
 class Dungeon
