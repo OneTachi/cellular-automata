@@ -3,6 +3,9 @@
 using namespace std;
 int main(int argc, char* argv[])
 {
-	cout << "Testing" << endl;
+	if (argc == 1)
+	{
+		Dungeon dun(100, 100, 5, 20, 50);
+	}
 	return 1;
 }

@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 //Used for extended Unicoe (possibly, not in use currently)
-#include <io.h>
+// #include <io.h>
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -28,7 +28,8 @@ class Dungeon
 public:	
 	Dungeon(int, int, int);
 	Dungeon(string); // Create fixed dungeon (Debug)
-	
+	Dungeon(int, int, int, int, int, bool);	
+
 	void set_tile(pair<int, int>, int);
 	void set_temp_tile(pair<int, int>, int); // Set tile for temporary grid
 	void set_generations(int);
@@ -38,7 +39,7 @@ public:
 
 	int get_neighborhood(int, int, int); // Get Moore Neighborhood
 	bool is_in_bounds(int, int);
-	void print();
+	void print(bool);
 	void apply_rule(pair<int, int>);
 	void calculate_generation();
 	void noise_grid(int, int);
@@ -110,9 +111,37 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 	}
 }
 
+Dungeon::Dungeon(int rows, int cols, int generationGoal, int noise_size, int ratio, bool pretty = true)
+{
+        num_rows = rows;
+        num_cols = cols;
+        generations = generationGoal;
+
+        // If we get invalid input, we will assume least possible number of rows/columns
+        if (rows < 1) { num_rows = 1; }
+        if (cols < 1) { num_cols = 1; }
+
+        // Set dungeon size
+        dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
+        temp_dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
+        //Sets all tiles in the dungeon to WALLs
+        for(int i=0; i<num_rows; i++)
+        {
+                for(int j=0; j<num_cols; j++)
+                {
+                        set_tile(pair<int,int>(i,j), WALL);
+                }
+        }
+	noise_grid(noise_size, ratio);
+	make_maze();
+	print(pretty);
+}
+
+
+
 /*
  * Utility function that outputs the maze as a string.
- * Numbers grouped together indicate a row. Spaces indicate the next row in the dungeon. 
+ * Numbers grouped togetiher indicate a row. Spaces indicate the next row in the dungeon. 
  * If we returned "10 01" this is equivalent to the dungeon:
  * 1 0
  * 0 1 
@@ -277,8 +306,9 @@ void Dungeon::make_maze()
 	}
 }
 
-void Dungeon::print()
+void Dungeon::print(bool pretty)
 {
+	/**
 	for (int row = 0; row < num_rows; row++)
 	{
 		for (int col = 0; col < num_cols; col++)
@@ -297,10 +327,10 @@ void Dungeon::print()
 		}
 		cout << endl;
 	}
+	*/	
 	
-	/*
-	if()
-	{
+//	if()
+//	{
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -310,8 +340,8 @@ void Dungeon::print()
 			}
 			cout << endl;
 		}
-	}
-	*/
+//	}
+	
 }
 
 
