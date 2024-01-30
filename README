@@ -22,9 +22,15 @@ THIS IS CELLULAR AUTOMATA -> What it is
 	-> Printing could look cleaner if we could implement a full box character for walls. 
 	-> The dungeon expands in generations. We can watch the rulset be implemented once we set the noise.
 	-> This lets us observe patterns in the generation, and see how it could be tweaked for different uses.
-
 --> How we made it, ruleset, our first ruleset, changes we did to it to get dungeon generation vs maze generation
-
+	We started by creating the basics: just a grid with 1's and 0's. We then created a function to get a certain tiles
+	neighborhood, since that was often used in example cellular automata rulesets. Following this we decided on a basic 
+	ruleset: If a tile had between 0 and 4 neighboring floor tiles: it was a floor, otherwise it was a wall. This ruleset
+	worked when the noise grid covered the entire dungeon, but had limitations. If we had a small noise grid it would 
+	cause the non noise grid parts of the dungeon that were all walls to all flip to be all floors, and then flip again
+	each subsequent generation. This eventually overtook the noise, and was not what we wanted. 
+	So instead we added an extra rule: when a tile had 0 neighboring floors, nothing happened. This fixed our problem,
+	and we generated some grids that looked like actual dungeons.
 --> Videos we used
 	
 --> How to use it
