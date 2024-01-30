@@ -214,23 +214,23 @@ void test_print()
 {
 	cout << "Maze 1: " << endl;
 	Dungeon testPrint1("000 000 000");
-	testPrint1.print();
+	testPrint1.print(1);
 	cout << "Maze 2: " << endl;
 	Dungeon testPrint2("111 111 111");
-	testPrint2.print();
+	testPrint2.print(1);
 	cout << "Maze 3: " << endl;
 	Dungeon testPrint3("000 111 000");
-	testPrint3.print();
+	testPrint3.print(1);
 	cout << "Maze 4: " << endl;
 	Dungeon testPrint4("111 000 111");
-	testPrint4.print();
+	testPrint4.print(1);
 	cout << "Maze 5: " << endl;
 	Dungeon testPrint5("111 101 111");
-	testPrint5.print();
+	testPrint5.print(1);
 	cout << "Maze 6: " << endl;
 	Dungeon testPrint6("000 010 000");
-	testPrint6.print();
+	testPrint6.print(1);
 	cout << "Maze 7: " << endl;
 	Dungeon testPrint7("00000 01110 01010 01110 00000");
-	testPrint7.print();
+	testPrint7.print(1);
 }

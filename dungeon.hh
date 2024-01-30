@@ -12,8 +12,8 @@
 #include <string.h>
 //Used for extended Unicoe (possibly, not in use currently)
 // #include <io.h>
-#include <fcntl.h>
-#include <stdio.h>
+//#include <fcntl.h>
+//#include <stdio.h>
 
 //The value each cell starts with
 const int startingCellValue = 0;
@@ -87,7 +87,12 @@ Dungeon::Dungeon(string maze)
 	num_cols = col;
 	temp_dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
 }
-
+/*
+ * General Constructor 
+ * Takes in the size of the dungeon in two ints, and how long to generate the dungeon
+ * Each dungeon is at least 1x1 in size 
+ * Makes every tile a wall
+*/
 Dungeon::Dungeon(int rows, int cols, int generationGoal)
 {
 	num_rows = rows;
@@ -110,16 +115,23 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal)
 		}
 	}
 }
-
+/*
+ * General Constructor 
+ * Takes in the size of the dungeon in two ints, how long to generate the dungeon, how big to make the noise grid, and the noise ratio
+ * Each dungeon is at least 1x1 in size 
+ * Makes every tile a wall to start
+ * Generates random noise in the dungon using the noise_size and ratio 
+ * Then makes the maze and prints it 
+*/
 Dungeon::Dungeon(int rows, int cols, int generationGoal, int noise_size, int ratio, bool pretty = true)
 {
-        num_rows = rows;
-        num_cols = cols;
-        generations = generationGoal;
+    num_rows = rows;
+    num_cols = cols;
+    generations = generationGoal;
 
-        // If we get invalid input, we will assume least possible number of rows/columns
-        if (rows < 1) { num_rows = 1; }
-        if (cols < 1) { num_cols = 1; }
+    // If we get invalid input, we will assume least possible number of rows/columns
+    if (rows < 1) { num_rows = 1; }
+    if (cols < 1) { num_cols = 1; }
 
         // Set dungeon size
         dungeon = vector<vector<int>>(num_rows, vector<int>(num_cols));
@@ -136,9 +148,6 @@ Dungeon::Dungeon(int rows, int cols, int generationGoal, int noise_size, int rat
 	make_maze();
 	print(pretty);
 }
-
-
-
 /*
  * Utility function that outputs the maze as a string.
  * Numbers grouped togetiher indicate a row. Spaces indicate the next row in the dungeon. 
@@ -178,7 +187,12 @@ bool Dungeon::is_in_bounds(int x, int y)
 	}
 	return false;
 }
-//If val = 0 return isNextToFloor, else return neighborhoodValue
+/*
+ * Takes coords of a tile in the dungeon 
+ * If val = 0 return isNextToFloor, else return neighborhoodValue
+ * Is next to floor checks if the tile is next to a floor tile, if true return 1, else return false
+ * Neighborhood value returns the total value of the neighborhood of a cell
+*/
 int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex) 
 {
 	//Note: Out of bounds will be considered a wall / not a floor 
@@ -228,11 +242,17 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
 		return -1;
 	}
 }
-
-//Generated the starting noise for the dungeon map 
+/*
+ * Generates the starting noise for the dungeon map 
+ * Starts at 0,0 and creates a square of noise based on the size
+ * Can only be as large as the smallest size of grid (length or width)
+ * The ratio is the rough percentage of noise added to the grid
+ * Expecting: Size>=0, Ratio between 1 and 100 
+ * Higher ratio = More Walls 	Lower Ratio = More Floors 
+ * (Ratio of 101 == All Walls)	(Ratio of 0 == All Floors)
+*/
 void Dungeon::noise_grid(int size, int ratio)
 {
-	//Expecting: Size>=0, Ratio between 1 and 100 
 	int comparer = 0;
 	//Makes sure the size is in bounds for both the rows and columns
 	if(size >= num_rows)
@@ -257,10 +277,11 @@ void Dungeon::noise_grid(int size, int ratio)
 		}
 	}
 }
-
 /**
  * This is the ruleset we will apply to the current tile. It makes its changes onto a temporary grid
  * Things to consider forward: Do we want to use time for our rules? 
+ * Takes a tile and checks its neighborhood 
+ * If it has 0 neighbors, nothing happens, between 1 and 4 neighbors, becomes a Floor, 5 to 8 neighbors and it becomes a wall
  */
 void Dungeon::apply_rule(pair<int, int> coords)
 {
@@ -269,7 +290,7 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	// If current tile has less than or equal to 4 neighboring floors, it will be a floor tile. Otherwise, it will be a wall tile.	
 	if (neighborhood <= 4) 
 	{ 
-		if(neighborhood > 0)
+		if(neighborhood > 0) //Change to == 3 for mazelike generations 
 		{
 			set_temp_tile(coords, FLOOR); 
 		}
@@ -277,7 +298,10 @@ void Dungeon::apply_rule(pair<int, int> coords)
 	else { set_temp_tile(coords, WALL); }	
 	//cout << "" << endl;
 }
-
+/*
+ * Applys the rule to every cell in the dungeon 
+ * Puts the new tile values in a temporary grid, then copies the temp grid to the original 
+*/
 void Dungeon::calculate_generation()
 {
 	// Iterate through grid one by one and apply rule for temp grid
@@ -299,22 +323,23 @@ void Dungeon::calculate_generation()
         }
     }
 }
-
+//Calls calculate generation for 'generations' amount of times
 void Dungeon::make_maze()
 {
-	// Temporarily setting noise grid to by 10 x 10
-	// noise_grid(10, 50);
-
 	// Continue to create the next generation till the maximum amount
 	for (; time < generations; time++)
 	{
 		calculate_generation();
 	}
 }
-
+/*
+ * Prints the maze in a grid 
+ * Defaults to pretty print, contains a print of just 1 and 0 for debugging 
+ * Possible change in future: Make pretty print use a full box character and work on linux and windows 
+ * 
+*/
 void Dungeon::print(bool pretty)
 {
-	/*
 	if(pretty)
 	{
 		for (int row = 0; row < num_rows; row++)
@@ -324,9 +349,9 @@ void Dungeon::print(bool pretty)
 				int value = get_tile(pair<int, int>(row, col));
 				if(value == WALL)
 				{
-					//_setmode(_fileno(stdout), _O_U16TEXT);
 					//Extended ASCII table code for filled in box
-					cout << (char)254u;
+					//cout << (char)254u;
+					cout << "+";
 				}
 				else if(value == FLOOR)
 				{
@@ -338,7 +363,6 @@ void Dungeon::print(bool pretty)
 	}
 	else
 	{
-		*/
 		for (int row = 0; row < num_rows; row++)
 		{
 			for (int col = 0; col < num_cols; col++)
@@ -348,7 +372,7 @@ void Dungeon::print(bool pretty)
 			}
 			cout << endl;
 		}
-	//}
+	}
 	
 }
 
@@ -359,6 +383,7 @@ void Dungeon::print(bool pretty)
 // Pretty_print(): Make the resulting dungeon look more like a dungeon when printed out. Do not make a new function, instead have print() accept a boolean that is default to true, if bool = true do pretty_print. If false, goes to 
 // already established print() -- Rory
 // Test bigger dungeons and see if they look like dungeons! -- Both
+// Comments / Readme / Pretty Print
 //
 // Later: 
 // More cool custom stuff with apply_rule (more tiles, cooler ruleset)
