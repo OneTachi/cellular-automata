@@ -6,7 +6,6 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-
 	if (argc == 1)
 	{
 		Dungeon dun(50, 50, 20, 50, 50);
@@ -24,12 +23,9 @@ int main(int argc, char* argv[])
 	int noise_size = atoi(argv[4]);
 	int ratio = atoi(argv[5]);
 	bool pretty_print = true;
-
-
+	
 	if (argc == 7) { pretty_print = atoi(argv[6]); }
 	Dungeon dun(rows, cols, generations, noise_size, ratio, pretty_print);
-		
-
-
+	
 	return 1;
 }

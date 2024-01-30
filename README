@@ -1,8 +1,7 @@
 NAME: Rory and Sidd
 
-THIS IS CELLULAR AUTOMATA -> What it is
+THIS IS CELLULAR AUTOMATA
 	
-
 -> How we used it (dungeon generation)
 	Cellular Automata is used in a variety of different ways from studying fluid dynamics to creating generative music.
 	We've decided to use it for simple dungeon generating for video games or a tabletop game like Dungeons and Dragons.	
@@ -24,7 +23,8 @@ THIS IS CELLULAR AUTOMATA -> What it is
 -> Findings/Limitations
 	-> This doesn't work without any noise, however it will work with just a single pixel that is floor. 
 	-> Noise is set always to spawn in a square and in the top left corner. 
-	-> Printing could look cleaner if we could implement a full box character for walls. 
+	-> Currently there is a gap between rows that looks like an empty space when in reality it is just the space 
+		between walls. Printing could look cleaner if we could implement a full box character for walls. 
 	-> The dungeon expands in generations. We can watch the rulset be implemented once we set the noise.
 	-> This lets us observe patterns in the generation, and see how it could be tweaked for different uses.
 

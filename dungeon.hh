@@ -242,9 +242,9 @@ int Dungeon::get_neighborhood(int val, int rowIndex, int colIndex)
  * Starts at 0,0 and creates a square of noise based on the size
  * Can only be as large as the smallest size of grid (length or width)
  * The ratio is the rough percentage of noise added to the grid
- * Expecting: Size>=0, Ratio between 1 and 100 
+ * Expecting: Size>=0, Ratio between 0 and 100 
  * Higher ratio = More Walls 	Lower Ratio = More Floors 
- * (Ratio of 101 == All Walls)	(Ratio of 0 == All Floors)
+ * (Ratio of 100 == All Walls)	(Ratio of 0 == All Floors)
 */
 void Dungeon::noise_grid(int size, int ratio)
 {
@@ -343,7 +343,8 @@ void Dungeon::print(bool pretty)
 				int value = get_tile(pair<int, int>(row, col));
 				if(value == WALL)
 				{
-					//Extended ASCII table code for filled in box
+					//Extended ASCII table code for filled in box, does not extend high enough vertically
+					//Does not display on Linux naturally
 					//cout << (char)254u;
 					cout << "+";
 				}
@@ -369,11 +370,10 @@ void Dungeon::print(bool pretty)
 	}
 }
 
-//TODO 
-// Readme
-//
-// Later: 
-// More cool custom stuff with apply_rule (more tiles, cooler ruleset)
-// Calculate runtime with Big O Notation and its actual runtime (f function)
-// Choose where noise grid does its noise grid stuff (coordinates/general location etc.)
+/* TODO 
+ * More cool custom stuff with apply_rule (more tiles, cooler ruleset)
+ * Calculate runtime with Big O Notation and its actual runtime (f function) 
+ * Choose where noise grid does its noise grid stuff (coordinates/general location etc.)
+ */
+
 #endif
