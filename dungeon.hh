@@ -273,7 +273,7 @@ void Dungeon::noise_grid(int size, int ratio)
 		}
 	}
 }
-/**
+/*
  * This is the ruleset we will apply to the current tile. It makes its changes onto a temporary grid
  * Things to consider forward: Do we want to use time for our rules? 
  * Takes a tile and checks its neighborhood 
@@ -332,7 +332,6 @@ void Dungeon::make_maze()
  * Prints the maze in a grid 
  * Defaults to pretty print, contains a print of just 1 and 0 for debugging 
  * Possible change in future: Make pretty print use a full box character and work on linux and windows 
- * 
 */
 void Dungeon::print(bool pretty)
 {
@@ -371,12 +370,8 @@ void Dungeon::print(bool pretty)
 	}
 }
 
-
-
 //TODO 
 // Main calling Dungeon appropriately and terminal things ./automata length width #ofgenerations lengthOfNoiseGrid=halfOfLength -- Sidd 
-// Pretty_print(): Make the resulting dungeon look more like a dungeon when printed out. Do not make a new function, instead have print() accept a boolean that is default to true, if bool = true do pretty_print. If false, goes to 
-// already established print() -- Rory
 // Test bigger dungeons and see if they look like dungeons! -- Both
 // Comments / Readme / Pretty Print
 //

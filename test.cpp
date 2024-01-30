@@ -84,7 +84,7 @@ void test_compare()
 void test_fixed_dungeon()
 {
 	Dungeon test("10 01");
-	test.print();
+	test.print(0);
 }
 
 void test_in_bounds()
@@ -166,7 +166,7 @@ void test_noise_all()
 	Dungeon dun(3, 3, 1);
 	dun.noise_grid(3, 0);
 	assert(dun.get_tile(pair<int, int>(0, 0)) == 1);
-        assert(dun.get_tile(pair<int, int>(2, 2)) == 1);
+    assert(dun.get_tile(pair<int, int>(2, 2)) == 1);
 }
 void test_noise_one()
 {
