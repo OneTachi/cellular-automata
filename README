@@ -3,7 +3,10 @@ NAME: Rory and Sidd
 THIS IS CELLULAR AUTOMATA -> What it is
 	
 
---> How we used it (dungeon generation)
+-> How we used it (dungeon generation)
+	Cellular Automata is used in a variety of different ways from studying fluid dynamics to creating generative music.
+	We've decided to use it for simple dungeon generating for video games or a tabletop game like Dungeons and Dragons.	
+
 	We start by generating a grid (dungeon) of a set size. This dungeon is filled entirely with walls.
 	Then, we generate random "noise" in the top left of the dungeon. This noise flips random tiles from 
 	walls to floors. Then, a set of rules is applied to the whole dungeon. This causes the floors to spread 
@@ -31,6 +34,19 @@ THIS IS CELLULAR AUTOMATA -> What it is
 	each subsequent generation. This eventually overtook the noise, and was not what we wanted. 
 	So instead we added an extra rule: when a tile had 0 neighboring floors, nothing happened. This fixed our problem,
 	and we generated some grids that looked like actual dungeons.
---> Videos we used
 	
---> How to use it
+-> Videos
+	We used these videos to help us get started with the project!
+	
+	Maze Generator using Cellular Automata in Godot by Not Yet Terminal
+	https://youtu.be/ui1uksc_g-s?si=hLbRRn87Kan1-DYw
+	
+	Cellular Automata | Procedural Generation | Game Development Tutorial by White Box Dev
+	https://youtu.be/slTEz6555Ts?si=vtwz1Gsq6WvsxDBX
+	
+
+-> How to run the program
+	If you haven't already, install Make onto your system! 
+	
+	Clone the repository and compile the code by typing `make` onto your terminal/console.
+	Then type in `./automata` to run a stock dungeon.   
