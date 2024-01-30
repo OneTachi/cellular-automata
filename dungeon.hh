@@ -244,9 +244,9 @@ void Dungeon::noise_grid(int size, int ratio)
 		size = num_cols-1;
 	}
 	//Loops through given size cube and created noise based on the given ratio 
-	for(int i=0; i <= size; i++)
+	for(int i=0; i < size; i++)
 	{
-		for(int j=0; j <= size; j++)
+		for(int j=0; j < size; j++)
 		{
 			//If (random number from 1-100 is >= ratio), then make tile floor 
 			comparer = rand() % (100+1);
